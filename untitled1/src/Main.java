@@ -8,7 +8,6 @@ public class Main {
         startTasck();
     }
 public static void startTasck () {
-        while (true){
     Scanner scanner = new Scanner(System.in);
     System.out.println("Выберите номер задания или 0 для выхода:");
     int choice = scanner.nextInt();
@@ -62,7 +61,6 @@ public static void startTasck () {
             System.out.println("Номер задания не найден");
 
     }
-    }//startTasck();
 }
     public static void tasck1() {
         System.out.println("Начало задание 1: ");
