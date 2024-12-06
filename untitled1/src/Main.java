@@ -1,10 +1,14 @@
 import java.util.Scanner;
+import java.text.DecimalFormat;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Main {
     public static void main(String[] args) {
         startTasck();
     }
 public static void startTasck () {
+        while (true){
     Scanner scanner = new Scanner(System.in);
     System.out.println("Выберите номер задания или 0 для выхода:");
     int choice = scanner.nextInt();
@@ -27,6 +31,30 @@ public static void startTasck () {
         case 6:
             tasck6();
             break;
+        case 7:
+            task7();
+            break;
+        case 8:
+            task8();
+            break;
+        case 9:
+            task9();
+            break;
+        case 10:
+            task10();
+            break;
+        case 11:
+            task11();
+            break;
+        case 12:
+            task12();
+            break;
+        case 13:
+            task13();
+            break;
+        case 14:
+            task14();
+            break;
         case 0:
             System.exit(0);
             break;
@@ -34,7 +62,7 @@ public static void startTasck () {
             System.out.println("Номер задания не найден");
 
     }
-    startTasck();
+    }//startTasck();
 }
     public static void tasck1() {
         System.out.println("Начало задание 1: ");
@@ -191,6 +219,240 @@ public static void startTasck () {
             System.out.println("Этот тип перевода пока не реализован.");
         }
 
+        scanner.close();
+    }
+    public static void task7(){
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Введите размер массива: ");
+        int size = scanner.nextInt();
+        int[] array = new int[size];
+        System.out.println("Введите элементы массива:");
+        for (int i = 0; i < size; i++) {
+            array[i] = scanner.nextInt();
+        }
+
+        int x = 10;
+        int y = 20;
+        int z = 30;
+
+        boolean found = false;
+        for (int value : array) {
+            if (value == x || value == y || value == z) {
+                found = true;
+                break;
+            }
+        }
+
+        if (found) {
+            System.out.println("Данное значение имеется в константах");
+        } else {
+            System.out.println("Данные значения отсутствуют в константах");
+        }
+        scanner.close();
+    }
+    public static void task8(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Введите целое положительное число n: ");
+        int n = scanner.nextInt();
+
+        if (n <= 0) {
+            System.out.println("Ошибка: n должно быть положительным числом.");
+            return;
+        }
+
+        int k = (n + 1) / 2;
+        int sum = k * k;
+
+        System.out.println("Сумма нечетных чисел от 1 до " + n + ": " + sum);
+        scanner.close();
+    }
+    public static void task9(){
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Введите размер массива: ");
+        int size = scanner.nextInt();
+        double[] array = new double[size];
+        System.out.println("Введите элементы массива (дробные числа):");
+        for (int i = 0; i < size; i++) {
+            array[i] = scanner.nextDouble();
+        }
+
+        double sum = 0;
+        for (double num : array) {
+            sum += num;
+        }
+        double average = sum / size;
+        System.out.println("Среднее арифметическое: " + average);
+
+        System.out.print("Массив, умноженный на среднее арифметическое: ");
+        for (int i = 0; i < size; i++) {
+            array[i] *= average;
+            System.out.print(array[i] + " ");
+        }
+        System.out.println();
+        scanner.close();
+    }
+    public static void task10(){
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Введите количество строк матрицы: ");
+        int rows = scanner.nextInt();
+        System.out.print("Введите количество столбцов матрицы: ");
+        int cols = scanner.nextInt();
+
+        double[][] matrix = new double[rows][cols];
+        System.out.println("Введите элементы матрицы:");
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                matrix[i][j] = scanner.nextDouble();
+            }
+        }
+
+        System.out.print("Первая строка матрицы, умноженная на 3: ");
+        for (int j = 0; j < cols; j++) {
+            System.out.print(matrix[0][j] * 3 + (j < cols - 1 ? ", " : ""));
+        }
+        System.out.println();
+
+        scanner.close();
+    }
+    //Итоговая задача 1
+    public static void task11(){
+        Scanner scanner = new Scanner(System.in);
+        DecimalFormat df = new DecimalFormat("#.##"); // Форматирование до 2 знаков после запятой
+
+        System.out.print("Введите текущий курс доллара: ");
+        double dollarRate = scanner.nextDouble();
+
+        System.out.print("Введите количество рублей: ");
+        double rubles = scanner.nextDouble();
+
+        if (dollarRate <= 0 || rubles < 0) {
+            System.out.println("Ошибка: Курс должен быть положительным, а количество рублей неотрицательным.");
+            return;
+        }
+
+        double dollars = rubles / dollarRate;
+        String formattedDollars = df.format(dollars);
+
+        System.out.println("Итого: " + formattedDollars + " долларов");
+
+        scanner.close();
+    }
+    //Итоговая задача 2
+    public static void task12(){
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Введите уравнение (5 символов): ");
+        String equation = scanner.next();
+
+        if (equation.length() != 5 || equation.charAt(3) != '=') {
+            System.out.println("Ошибка: Некорректный формат уравнения.");
+            return;
+        }
+
+        char operator = equation.charAt(1);
+        double num1 = Character.getNumericValue(equation.charAt(0));
+        double num2 = Character.getNumericValue(equation.charAt(4));
+        double result;
+
+        if(Character.isDigit(equation.charAt(0)) && Character.isLetter(equation.charAt(2)) && Character.isDigit(equation.charAt(4))){
+            if (operator == '+') {
+                result = num2 - num1;
+            } else if (operator == '-') {
+                result = num1 - num2;
+            } else {
+                System.out.println("Ошибка: Неверный оператор.");
+                return;
+            }
+        }else if(Character.isDigit(equation.charAt(0)) && Character.isDigit(equation.charAt(2)) && Character.isLetter(equation.charAt(4))){
+            if (operator == '+') {
+                result = num1 + num2;
+            } else if (operator == '-') {
+                result = num1 - num2;
+            } else {
+                System.out.println("Ошибка: Неверный оператор.");
+                return;
+            }
+
+        }else{
+            System.out.println("Ошибка: Некорректный формат уравнения.");
+            return;
+        }
+
+        System.out.println("Решение: " + result);
+        scanner.close();
+    }
+    //Итоговая задача 3
+    public static void task13(){
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Введите количество строк: ");
+        int n = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+
+        String[] strings = new String[n];
+        for (int i = 0; i < n; i++) {
+            System.out.print("Введите строку " + (i + 1) + ": ");
+            strings[i] = scanner.nextLine();
+        }
+
+        String maxUniqueString = findMaxUniqueString(strings);
+        System.out.println("Ответ: " + maxUniqueString);
+
+        scanner.close();
+    }
+    //Вспомогательная функция для итоговой задачи 3
+    public static String findMaxUniqueString(String[] strings) {
+        String maxUniqueString = "";
+        int maxUniqueChars = 0;
+
+        for (String str : strings) {
+            Set<Character> uniqueChars = new HashSet<>();
+            for (char c : str.toCharArray()) {
+                uniqueChars.add(c);
+            }
+            if (uniqueChars.size() > maxUniqueChars) {
+                maxUniqueChars = uniqueChars.size();
+                maxUniqueString = str;
+            }
+        }
+
+        return maxUniqueString;
+    }
+    //Итоговая задача 4
+    public static void task14(){
+        Scanner scanner = new Scanner(System.in);
+        String answer = "Заархивированный вирус";
+        boolean hintUsed = false;
+
+        for (int i = 1; i <= 3; i++) {
+            System.out.println("\nПопытка " + i + ":");
+            System.out.println("Сидит дед, во сто шуб одет, кто его раздевает, тот слезы проливает.");
+            System.out.print("Ваш ответ: ");
+            String userAnswer = scanner.nextLine().trim();
+
+
+            if (i == 1 && userAnswer.equalsIgnoreCase("Подсказка")) {
+                System.out.println("\nПодсказка: Это что-то, что может быть опасно, но сейчас находится в неактивном состоянии.");
+                hintUsed = true;
+                continue;
+            } else if (i > 1 && userAnswer.equalsIgnoreCase("Подсказка")) {
+                System.out.println("Подсказка уже недоступна.");
+                continue;
+            }
+
+            if (userAnswer.equalsIgnoreCase(answer)) {
+                System.out.println("Правильно!");
+                return;
+            } else if (i < 3) {
+                System.out.println("Подумай еще!");
+            } else {
+                System.out.println("Обидно, приходи в другой раз");
+                return;
+            }
+        }
         scanner.close();
     }
 }
